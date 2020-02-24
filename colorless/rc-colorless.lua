@@ -38,8 +38,8 @@ layouts:init()
 
 -- Main menu configuration
 -----------------------------------------------------------------------------------------------------------------------
-local mymenu = require("colorless.menu-config") -- load file with menu configuration
-mymenu:init({ env = env })
+-- local mymenu = require("colorless.menu-config") -- load file with menu configuration
+-- mymenu:init({ env = env })
 
 
 -- Panel widgets
@@ -109,7 +109,7 @@ awful.screen.connect_for_each_screen(
 		env.wallpaper(s)
 
 		-- tags
-		awful.tag({ "Tag1", "Tag2", "Tag3", "Tag4", "Tag5" }, s, awful.layout.layouts[1])
+		awful.tag({ "Tag1", "Tag2", "Tag3", "Tag4", "Tag5", "Tag6" }, s, awful.layout.layouts[1])
 
 		-- layoutbox widget
 		layoutbox[s] = redflat.widget.layoutbox({ screen = s })
@@ -129,7 +129,6 @@ awful.screen.connect_for_each_screen(
 			{ -- left widgets
 				layout = wibox.layout.fixed.horizontal,
 
-				env.wrapper(mymenu.widget, "mainmenu", mymenu.buttons),
 				separator,
 				env.wrapper(taglist[s], "taglist"),
 				separator,
@@ -160,7 +159,7 @@ awful.screen.connect_for_each_screen(
 -- Key bindings
 -----------------------------------------------------------------------------------------------------------------------
 local hotkeys = require("colorless.keys-config") -- load file with hotkeys configuration
-hotkeys:init({ env = env, menu = mymenu.mainmenu })
+hotkeys:init({ env = env })
 
 
 -- Rules
@@ -171,8 +170,8 @@ rules:init({ hotkeys = hotkeys})
 
 -- Titlebar setup
 -----------------------------------------------------------------------------------------------------------------------
-local titlebar = require("colorless.titlebar-config") -- load file with titlebar configuration
-titlebar:init()
+-- local titlebar = require("colorless.titlebar-config") -- load file with titlebar configuration
+-- titlebar:init()
 
 
 -- Base signal set for awesome wm

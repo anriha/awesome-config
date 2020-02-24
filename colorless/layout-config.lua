@@ -18,7 +18,7 @@ function layouts:init()
 
 	-- layouts list
 	local layset = {
-		awful.layout.suit.floating,
+		awful.layout.suit.spiral,
 		awful.layout.suit.tile,
 		awful.layout.suit.tile.left,
 		awful.layout.suit.tile.bottom,
@@ -28,12 +28,12 @@ function layouts:init()
 		awful.layout.suit.corner.ne,
 		awful.layout.suit.corner.sw,
 		awful.layout.suit.corner.se,
-		awful.layout.suit.spiral,
 		awful.layout.suit.magnifier,
 		awful.layout.suit.max,
 		awful.layout.suit.max.fullscreen,
 		redflat.layout.grid,
 		redflat.layout.map,
+		awful.layout.suit.floating,
 	}
 
 	awful.layout.layouts = layset

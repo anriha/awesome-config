@@ -306,6 +306,15 @@ function hotkeys:init(args)
 			{ env.mod }, "F1", function() redtip:show() end,
 			{ description = "Show hotkeys helper", group = "Main" }
 		},
+        {
+            {}, "XF86AudioRaiseVolume", function() os.execute("pamixer -i 2") end, {}
+        },
+        {
+            {}, "XF86AudioLowerVolume", function() os.execute("pamixer -d 2") end, {}
+        },
+        {
+            {}, "XF86AudioMute", function() os.execute("pamixer --toggle-mute") end, {}
+        },
 		{
 			{ env.mod }, "F2", function () redflat.service.navigator:run() end,
 			{ description = "Window control mode", group = "Main" }
@@ -322,21 +331,20 @@ function hotkeys:init(args)
 			{ env.mod }, "Return", function() awful.spawn(env.terminal) end,
 			{ description = "Open a terminal", group = "Main" }
 		},
-
-		{
+        {
 			{ env.mod }, "l", focus_switch_byd("right"),
 			{ description = "Go to right client", group = "Client focus" }
 		},
 		{
-			{ env.mod }, "j", focus_switch_byd("left"),
+			{ env.mod }, "h", focus_switch_byd("left"),
 			{ description = "Go to left client", group = "Client focus" }
 		},
 		{
-			{ env.mod }, "i", focus_switch_byd("up"),
+			{ env.mod }, "k", focus_switch_byd("up"),
 			{ description = "Go to upper client", group = "Client focus" }
 		},
 		{
-			{ env.mod }, "k", focus_switch_byd("down"),
+			{ env.mod }, "j", focus_switch_byd("down"),
 			{ description = "Go to lower client", group = "Client focus" }
 		},
 		{
@@ -347,86 +355,13 @@ function hotkeys:init(args)
 			{ env.mod }, "Tab", focus_to_previous,
 			{ description = "Go to previos client", group = "Client focus" }
 		},
-
-		{
-			{ env.mod }, "w", function() mainmenu:show() end,
-			{ description = "Show main menu", group = "Widgets" }
-		},
 		{
 			{ env.mod }, "r", function() apprunner:show() end,
 			{ description = "Application launcher", group = "Widgets" }
 		},
 		{
-			{ env.mod }, "p", function() redflat.float.prompt:run() end,
-			{ description = "Show the prompt box", group = "Widgets" }
-		},
-		{
-			{ env.mod, "Control" }, "i", function() redflat.widget.minitray:toggle() end,
-			{ description = "Show minitray", group = "Widgets" }
-		},
-		{
-			{ env.mod }, "F3", function() redflat.float.qlaunch:show() end,
-			{ description = "Application quick launcher", group = "Main" }
-		},
-
-		{
-			{ env.mod }, "t", function() redtitle.toggle(client.focus) end,
-			{ description = "Show/hide titlebar for focused client", group = "Titlebar" }
-		},
-		{
-			{ env.mod, "Control" }, "t", function() redtitle.switch(client.focus) end,
-			{ description = "Switch titlebar view for focused client", group = "Titlebar" }
-		},
-		{
-			{ env.mod, "Shift" }, "t", function() redtitle.toggle_all() end,
-			{ description = "Show/hide titlebar for all clients", group = "Titlebar" }
-		},
-		{
-			{ env.mod, "Control", "Shift" }, "t", function() redtitle.global_switch() end,
-			{ description = "Switch titlebar view for all clients", group = "Titlebar" }
-		},
-
-		{
-			{ env.mod }, "a", nil, function() appswitcher:show({ filter = current }) end,
-			{ description = "Switch to next with current tag", group = "Application switcher" }
-		},
-		{
-			{ env.mod }, "q", nil, function() appswitcher:show({ filter = current, reverse = true }) end,
-			{ description = "Switch to previous with current tag", group = "Application switcher" }
-		},
-		{
-			{ env.mod, "Shift" }, "a", nil, function() appswitcher:show({ filter = allscr }) end,
-			{ description = "Switch to next through all tags", group = "Application switcher" }
-		},
-		{
-			{ env.mod, "Shift" }, "q", nil, function() appswitcher:show({ filter = allscr, reverse = true }) end,
-			{ description = "Switch to previous through all tags", group = "Application switcher" }
-		},
-
-		{
-			{ env.mod }, "Escape", awful.tag.history.restore,
-			{ description = "Go previos tag", group = "Tag navigation" }
-		},
-		{
-			{ env.mod }, "Right", awful.tag.viewnext,
-			{ description = "View next tag", group = "Tag navigation" }
-		},
-		{
-			{ env.mod }, "Left", awful.tag.viewprev,
-			{ description = "View previous tag", group = "Tag navigation" }
-		},
-
-		{
-			{ env.mod }, "y", function() laybox:toggle_menu(mouse.screen.selected_tag) end,
-			{ description = "Show layout menu", group = "Layouts" }
-		},
-		{
-			{ env.mod }, "Up", function() awful.layout.inc(1) end,
+			{ env.mod }, "space", function() awful.layout.inc(1) end,
 			{ description = "Select next layout", group = "Layouts" }
-		},
-		{
-			{ env.mod }, "Down", function() awful.layout.inc(-1) end,
-			{ description = "Select previous layout", group = "Layouts" }
 		},
 	}
 
@@ -438,25 +373,13 @@ function hotkeys:init(args)
 			{ description = "Toggle fullscreen", group = "Client keys" }
 		},
 		{
-			{ env.mod }, "F4", function(c) c:kill() end,
+			{ env.mod }, "q", function(c) c:kill() end,
 			{ description = "Close", group = "Client keys" }
 		},
-		{
-			{ env.mod, "Control" }, "f", awful.client.floating.toggle,
-			{ description = "Toggle floating", group = "Client keys" }
-		},
-		{
-			{ env.mod, "Control" }, "o", function(c) c.ontop = not c.ontop end,
-			{ description = "Toggle keep on top", group = "Client keys" }
-		},
-		{
-			{ env.mod }, "n", function(c) c.minimized = true end,
-			{ description = "Minimize", group = "Client keys" }
-		},
-		{
-			{ env.mod }, "m", function(c) c.maximized = not c.maximized; c:raise() end,
-			{ description = "Maximize", group = "Client keys" }
-		}
+        {
+            { env.mod }, "o",      function (c) c:move_to_screen()               end,
+            {description = "move to screen", group = "client"}
+        },
 	}
 
 	self.keys.root = redflat.util.key.build(self.raw.root)
